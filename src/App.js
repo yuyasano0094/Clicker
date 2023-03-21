@@ -11,12 +11,10 @@ function App() {
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       setTotalCount(data);
-      console.log(data);
     });
   }, []);
   const handleClick = () => {
     // Increment the count and update the state
-    console.log("click");
     const newCount = count + 1;
     const newTotalCount = totalCount + 1;
     setCount(newCount);
