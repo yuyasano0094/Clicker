@@ -21,6 +21,7 @@ function FloatingSheepRight(props) {
       className="sheepRight"
       src={sheepRight}
       style={SheepStyles.current}
+      alt="sheepRight"
     ></img>
   ) : (
     <div />
