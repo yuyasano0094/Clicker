@@ -1,10 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+html {
+  background: url("./image/background.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+h3 {
+  font-size: 6vw;
+  margin: 25px 0 0 0;
+}
+body {
+  background: transparent;
+  overflow: hidden;
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
+}
 .App {
   text-align: center;
+  position: relative;
+  margin: 0;
+}
+.appWrapper {
+  position: absolute;
+  z-index: 9;
+  left: 50%;
+  height: 100vh;
+  transform: translate(-50%, 0);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn {
+  border: 5px solid #ba3e30;
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 34px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 9;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -23,16 +57,158 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.mushroomWrapper {
+  text-align: center;
+}
+.mushroomBackground {
+  margin: 0;
+  height: auto;
+  position: fixed;
+  width: auto;
+  opacity: 1;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  background: url("./image/mashroomBackground.png") no-repeat center bottom
+    fixed;
+}
+.mushroomHost {
+  margin: 0;
+  height: 100vh;
+  position: fixed;
+  bottom: 0%;
+  width: 100%;
+  opacity: 1;
+  z-index: 0;
+  background: transparent url("./image/mashroomHost.png") no-repeat center
+    bottom fixed;
+}
+.mushroomHost[grow="1"] {
+  animation: grow 0.5s 1;
+  animation-timing-function: ease-in-out;
+}
+.creditModel :not(.impomu, h2) {
+  padding: 0;
+  margin: 0;
+}
+.creditModel > h2 {
+  color: rgb(105, 3, 4);
+  font-size: 3vw;
+  margin: 0;
+}
+.creditModel > p,
+p > a {
+  font-size: 1.5vw;
+  color: rgb(105, 3, 4);
+}
+.creditModel > a {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+.footer > a {
+  text-decoration: none;
+  color: #ba3e30;
+  cursor: pointer;
+}
+p > a {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+.impomu {
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+.footer {
+  font-size: 1vw;
+  position: fixed;
+  bottom: 0%;
+  right: 0%;
+  padding-right: 10px;
+  font-family: bold;
+  text-decoration: none;
+  background-color: none;
+  color: #ba3e30;
+}
 .App-link {
   color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.sheepRight,
+.sheepLeft {
+  width: 20%;
+  height: auto;
+  animation: float 1s infinite;
+  animation-timing-function: linear;
+}
+.creditWrapper {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background: rgba(49, 49, 49, 0.5);
+  z-index: 10;
+  text-align: center;
+}
+.creditModel {
+  position: absolute;
+  top: 20%;
+  bottom: 28%;
+  left: 30%;
+  right: 30%;
+  border-radius: 25px;
+  border: 4px solid rgb(105, 3, 4);
+  background: rgba(139, 191, 243, 0.8);
+  text-align: center;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0vh);
   }
-  to {
-    transform: rotate(360deg);
+  25% {
+    transform: translateY(-10vh);
+  }
+  50% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(10vh);
+  }
+  100% {
+    transform: translateY(0vh);
+  }
+}
+@keyframes grow {
+  0% {
+    transform: scaleY(1);
+    bottom: 0%;
+  }
+  50% {
+    transform: scaleY(1.2);
+    bottom: 10%;
+  }
+  100% {
+    transform: scaleY(1);
+    bottom: 0%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .btn {
+    font-size: 4.35vw;
+  }
+  .footer {
+    font-size: 4vw;
+    right: 7%;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .clickButton {
+    position: relative;
+    top: 70%;
+  }
+  .clickCounter {
+    position: relative;
+    top: 10%;
   }
 }
