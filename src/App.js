@@ -2,8 +2,6 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { db } from "./firebase/firebase";
 import { onValue, ref, set } from "firebase/database";
-import sheepRight from "./image/sheep-right.png";
-import sheepLeft from "./image/sheep-left.png";
 import FloatingSheepLeft from "./components/FloatingSheepLeft";
 import FloatingSheepRight from "./components/FloatingSheepRight";
 function App() {
