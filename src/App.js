@@ -22,15 +22,19 @@ function App() {
   };
   const handleClick = () => {
     // Increment the count and update the state
-    const randomNumber = getRandomInt(2);
-    setShowSheep([...showSheep, randomNumber]);
-    setGrow(1);
-    const newCount = count + 1;
-    const newTotalCount = totalCount + 1;
-    setCount(newCount);
-    set(ref(db), {
-      count: newTotalCount,
-    });
+    if (totalCount > 0) {
+      const randomNumber = getRandomInt(2);
+      setShowSheep([...showSheep, randomNumber]);
+      setGrow(1);
+      const newCount = count + 1;
+      const newTotalCount = totalCount + 1;
+
+      setCount(newCount);
+      set(ref(db), {
+        count: newTotalCount,
+      });
+    }
+
     // Update the count in Firebase
   };
   const openCredits = () => {
