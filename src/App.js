@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "./firebase/firebase";
 import { onValue, ref, set } from "firebase/database";
 import FloatingSheepLeft from "./components/FloatingSheepLeft";
