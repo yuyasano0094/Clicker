@@ -1,22 +1,98 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { db } from "./firebase/firebase";
 import { onValue, ref, set } from "firebase/database";
 import FloatingSheepLeft from "./components/FloatingSheepLeft";
 import FloatingSheepRight from "./components/FloatingSheepRight";
+import mushroomHost from "./image/newMushroomHost.png";
+import a1 from "./sounds/1.mp3";
+import a2 from "./sounds/2.mp3";
+import a3 from "./sounds/3.mp3";
+import a4 from "./sounds/4.mp3";
+import a5 from "./sounds/5.mp3";
+import a6 from "./sounds/6.mp3";
+import a7 from "./sounds/7.mp3";
+import a8 from "./sounds/8.mp3";
+import a9 from "./sounds/9.mp3";
+import a10 from "./sounds/10.mp3";
+import a11 from "./sounds/11.mp3";
+import a12 from "./sounds/12.mp3";
+import a13 from "./sounds/13.mp3";
+import a14 from "./sounds/14.mp3";
+import a15 from "./sounds/15.mp3";
 function App() {
   const [count, setCount] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [grow, setGrow] = useState(0);
   const [showSheep, setShowSheep] = useState([]);
   const [showModel, setShowModel] = useState(0);
+  const [soundArray, setSoundArray] = useState([]);
+  const [sound, setSound] = useState("");
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef();
   useEffect(() => {
     const starCountRef = ref(db, "count");
+    setSoundArray([
+      a1,
+      a2,
+      a3,
+      a4,
+      a5,
+      a6,
+      a7,
+      a8,
+      a9,
+      a10,
+      a11,
+      a12,
+      a13,
+      a14,
+      a15,
+      // "./sounds/1.mp3",
+      // "./sounds/2.mp3",
+      // "./sounds/3.mp3",
+      // "./sounds/4.mp3",
+      // "./sounds/5.mp3",
+      // "./sounds/6.mp3",
+      // "./sounds/7.mp3",
+      // "./sounds/8.mp3",
+      // "./sounds/9.mp3",
+      // "./sounds/10.mp3",
+      // "./sounds/11.mp3",
+      // "./sounds/12.mp3",
+      // "./sounds/13.mp3",
+      // "./sounds/14.mp3",
+      // "./sounds/15.mp3",
+    ]);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
       setTotalCount(data);
     });
   }, []);
+  const handleEnded = () => {
+    console.log("ended");
+    setIsPlaying(false);
+  };
+  const updateSong = (source) => {
+    setSound(source);
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.load();
+      //audioRef.current.play();
+    }
+  };
+  const playSong = () => {
+    var myAudio = document.getElementById("myAudio");
+    //const testAudio = new Audio(test);
+    //console.log(testAudio);
+    if (myAudio && !isPlaying) {
+      const sound = soundArray[getRandomInt(soundArray.length)];
+      updateSong(sound);
+      setIsPlaying(true);
+      console.log(myAudio);
+      myAudio.play();
+    }
+  };
   const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
   };
@@ -26,16 +102,14 @@ function App() {
       const randomNumber = getRandomInt(2);
       setShowSheep([...showSheep, randomNumber]);
       setGrow(1);
+      playSong();
       const newCount = count + 1;
       const newTotalCount = totalCount + 1;
-
       setCount(newCount);
       set(ref(db), {
         count: newTotalCount,
       });
-    }
-
-    // Update the count in Firebase
+    } // Update the count in Firebase
   };
   const openCredits = () => {
     setShowModel(1);
@@ -60,17 +134,21 @@ function App() {
         </div>
       </div>
       <div className="mushroomBackground"></div>
-      <div
-        onAnimationEnd={() => setGrow(0)}
-        grow={grow}
-        className="mushroomHost"
-      ></div>
+      <div className="mushroomHost">
+        <img
+          grow={grow}
+          onAnimationEnd={() => setGrow(0)}
+          className="mushroomHostImg"
+          src={mushroomHost}
+          alt="mushroomHost"
+        ></img>
+      </div>
       <div className="sheepHolder">
         {showSheep.map((sheep, index) =>
           sheep === 1 ? (
-            <FloatingSheepLeft delay={2000} key={index} />
+            <FloatingSheepLeft delay={1000} key={index} />
           ) : (
-            <FloatingSheepRight delay={2000} key={index} />
+            <FloatingSheepRight delay={1000} key={index} />
           )
         )}
       </div>
@@ -102,12 +180,6 @@ function App() {
                 Fulgur Ovid
               </a>
             </p>
-            <p>
-              Fulgur Portrait by{" "}
-              <a href="https://www.nijisanji.jp/en/talents/l/fulgur-ovid">
-                Nijisanji EN Official Art
-              </a>
-            </p>
           </div>
         </div>
       ) : (
@@ -121,6 +193,10 @@ function App() {
           Credits
         </a>
       </div>
+      <audio id="myAudio" onEnded={handleEnded} ref={audioRef}>
+        <source src={sound} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
     </div>
   );
 }

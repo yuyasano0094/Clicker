@@ -60,30 +60,29 @@ body {
 .mushroomWrapper {
   text-align: center;
 }
-.mushroomBackground {
-  margin: 0;
-  height: auto;
-  position: fixed;
-  width: auto;
-  opacity: 1;
-  z-index: 0;
-  height: 100%;
-  width: 100%;
-  background: url("./image/mashroomBackground.png") no-repeat center bottom
-    fixed;
-}
 .mushroomHost {
   margin: 0;
   height: 100vh;
   position: fixed;
-  bottom: 0%;
-  width: 100%;
+  width: 100vw;
   opacity: 1;
   z-index: 0;
-  background: transparent url("./image/mashroomHost.png") no-repeat center
-    bottom fixed;
+  display: flex;
+  justify-content: center;
+
+  /* background: transparent url("./image/newMushroomHost.png") no-repeat center
+    bottom fixed; */
 }
-.mushroomHost[grow="1"] {
+.mushroomHostImg {
+  position: relative;
+
+  top: 20%;
+  height: 80%;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+.mushroomHostImg[grow="1"] {
   animation: grow 0.5s 1;
   animation-timing-function: ease-in-out;
 }
@@ -182,18 +181,18 @@ p > a {
 @keyframes grow {
   0% {
     transform: scaleY(1);
-    bottom: 0%;
+    top: 20%;
   }
   50% {
     transform: scaleY(1.2);
-    bottom: 10%;
+    top: 13%;
   }
   100% {
     transform: scaleY(1);
-    bottom: 0%;
+    top: 20%;
   }
 }
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 912px) {
   .btn {
     font-size: 4.35vw;
   }
@@ -201,8 +200,19 @@ p > a {
     font-size: 4vw;
     right: 7%;
   }
-}
-@media only screen and (max-width: 450px) {
+  .creditModel {
+    left: 0%;
+    right: 0%;
+  }
+  .creditModel > p,
+  p > a {
+    font-size: 5vw;
+  }
+  .creditModel > h2 {
+    color: rgb(105, 3, 4);
+    font-size: 8vw;
+    margin: 0;
+  }
   .clickButton {
     position: relative;
     top: 70%;
@@ -211,4 +221,6 @@ p > a {
     position: relative;
     top: 10%;
   }
+}
+@media only screen and (max-width: 450px) {
 }
