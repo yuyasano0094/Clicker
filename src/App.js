@@ -48,21 +48,6 @@ function App() {
       a13,
       a14,
       a15,
-      // "./sounds/1.mp3",
-      // "./sounds/2.mp3",
-      // "./sounds/3.mp3",
-      // "./sounds/4.mp3",
-      // "./sounds/5.mp3",
-      // "./sounds/6.mp3",
-      // "./sounds/7.mp3",
-      // "./sounds/8.mp3",
-      // "./sounds/9.mp3",
-      // "./sounds/10.mp3",
-      // "./sounds/11.mp3",
-      // "./sounds/12.mp3",
-      // "./sounds/13.mp3",
-      // "./sounds/14.mp3",
-      // "./sounds/15.mp3",
     ]);
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
@@ -70,7 +55,6 @@ function App() {
     });
   }, []);
   const handleEnded = () => {
-    console.log("ended");
     setIsPlaying(false);
   };
   const updateSong = (source) => {
@@ -78,18 +62,15 @@ function App() {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.load();
-      //audioRef.current.play();
     }
   };
   const playSong = () => {
     var myAudio = document.getElementById("myAudio");
-    //const testAudio = new Audio(test);
-    //console.log(testAudio);
+
     if (myAudio && !isPlaying) {
       const sound = soundArray[getRandomInt(soundArray.length)];
       updateSong(sound);
       setIsPlaying(true);
-      console.log(myAudio);
       myAudio.play();
     }
   };
