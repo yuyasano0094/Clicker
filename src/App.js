@@ -27,9 +27,6 @@ function App() {
   const [showSheep, setShowSheep] = useState([]);
   const [showModel, setShowModel] = useState(0);
   const [soundArray, setSoundArray] = useState([]);
-  const [sound, setSound] = useState("");
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef();
   useEffect(() => {
     const starCountRef = ref(db, "count");
     setSoundArray([
@@ -54,24 +51,11 @@ function App() {
       setTotalCount(data);
     });
   }, []);
-  const handleEnded = () => {
-    setIsPlaying(false);
-  };
-  const updateSong = (source) => {
-    setSound(source);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.load();
-    }
-  };
   const playSong = () => {
-    var myAudio = document.getElementById("myAudio");
-
-    if (myAudio && !isPlaying) {
-      const sound = soundArray[getRandomInt(soundArray.length)];
-      updateSong(sound);
-      setIsPlaying(true);
-      myAudio.play();
+    const sound = soundArray[getRandomInt(soundArray.length)];
+    const newAudio = new Audio(sound);
+    if (newAudio) {
+      newAudio.play();
     }
   };
   const getRandomInt = (max) => {
@@ -174,10 +158,6 @@ function App() {
           Credits
         </a>
       </div>
-      <audio id="myAudio" onEnded={handleEnded} ref={audioRef}>
-        <source src={sound} type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
     </div>
   );
 }
