@@ -151,7 +151,7 @@ function App() {
         <div />
       )}
       <div className="footer">
-        <a href="https://www.youtube.com/@FulgurOvid"> Fulgur TY Channel |</a>
+        <a href="https://www.youtube.com/@FulgurOvid"> Fulgur YT Channel |</a>
         <a href="https://twitter.com/Fulgur_Ovid"> Fulgur Twitter |</a>
         <a href="#/" onClick={openCredits}>
           {" "}
